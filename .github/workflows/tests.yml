@@ -1,0 +1,24 @@
+name: Tests
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup PDM
+        uses: pdm-project/setup-pdm@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: true
+      - name: Install dependencies
+        run: pdm install --no-lock --dev
+      - name: Run Ruff
+        run: pdm run ruff check .
+      - name: Run Pyright
+        run: pdm run basedpyright
