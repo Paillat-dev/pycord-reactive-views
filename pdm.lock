@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:fe19e8fbc71b42f70e7f42def3e0dad93de1c2fcf9e5a252b4fa606c3ea5b2f7"
+content_hash = "sha256:ce0276a2b471885bb42d49ce0aa48f39564637bfc4dbc67a04a8fc57e0920415"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -222,6 +222,17 @@ dependencies = [
 files = [
     {file = "py_cord-2.6.0-py3-none-any.whl", hash = "sha256:906cc077904a4d478af0264ae4374b0412ed9f9ab950d0162c4f31239a906d26"},
     {file = "py_cord-2.6.0.tar.gz", hash = "sha256:bbc0349542965d05e4b18cc4424136206430a8cc911fda12a0a57df6fdf9cd9c"},
+]
+
+[[package]]
+name = "python-dotenv"
+version = "1.0.1"
+requires_python = ">=3.8"
+summary = "Read key-value pairs from a .env file and set them as environment variables"
+groups = ["dev"]
+files = [
+    {file = "python-dotenv-1.0.1.tar.gz", hash = "sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca"},
+    {file = "python_dotenv-1.0.1-py3-none-any.whl", hash = "sha256:f7b63ef50f1b690dddf550d03497b66d609393b40b564ed0d674909a68ebf16a"},
 ]
 
 [[package]]
