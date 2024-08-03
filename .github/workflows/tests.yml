@@ -18,7 +18,9 @@ jobs:
           cache: true
       - name: Install dependencies
         run: pdm install --no-lock --dev
-      - name: Run Ruff
-        run: pdm run ruff check .
+      - name: Run Ruff linter
+        run: pdm run ruff check . --no-fix
+      - name: Run Ruff formatter
+        run: pdm run ruff format . --check
       - name: Run Pyright
         run: pdm run basedpyright
