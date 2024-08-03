@@ -22,7 +22,7 @@ dependencies = [
     "py-cord>=2.6.0",
     "typing-extensions<5,>=4.4.0",
 ]
-version = "0.1.0"
+version = "1.0.1"
 license = {text = "MIT"}
 
 [project.urls]
