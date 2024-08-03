@@ -1,6 +1,6 @@
 from collections.abc import Awaitable, Callable
 from inspect import isawaitable
-from typing import TypeGuard, TypeVar
+from typing import TypeGuard, TypeVar, Generic
 
 T = TypeVar("T")
 
@@ -15,7 +15,7 @@ class Unset:
 UNSET = Unset()
 
 
-class ReactiveValue[T]:
+class ReactiveValue(Generic[T]):
     """A value that can be a constant, a callable, or an async callable."""
 
     def __init__(self, func: Callable[[], T] | Callable[[], Awaitable[T]], default: T | Unset = UNSET):

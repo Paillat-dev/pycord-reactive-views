@@ -1,4 +1,4 @@
-from typing import Self, override
+from typing import Self
 
 import discord
 
@@ -17,7 +17,6 @@ class ReactiveView(discord.ui.View):
         super().__init__(timeout=timeout, disable_on_timeout=disable_on_timeout)
         self._reactives: list[ReactiveButton] = []
 
-    @override
     def add_item(self, item: discord.ui.Item[Self]) -> None:
         if isinstance(item, ReactiveButton):
             self._reactives.append(item)
