@@ -17,7 +17,7 @@ class Counter(ReactiveView):
         super().__init__()
         self.counter = 0
         self.counter_button = ReactiveButton(
-            label=ReactiveValue(lambda: str(self.counter), "0"),
+            label=ReactiveValue(lambda: f"Count: {self.counter}", "Count: 0"),
             style=ReactiveValue(
                 lambda: discord.ButtonStyle.primary if self.counter % 2 == 0 else discord.ButtonStyle.secondary,
                 discord.ButtonStyle.primary,
@@ -26,19 +26,19 @@ class Counter(ReactiveView):
         self.reset_button = ReactiveButton(
             label="Reset",
             style=discord.ButtonStyle.danger,
-            disabled=ReactiveValue(lambda: self.counter == 0, default=True),
+            disabled=ReactiveValue(lambda: self.counter == 0, True),
         )
-        self.counter_button.callback = self._button_callback
-        self.reset_button.callback = self._reset_callback
+        self.counter_button.callback = self._increment
+        self.reset_button.callback = self._reset
         self.add_item(self.counter_button)
         self.add_item(self.reset_button)
 
-    async def _button_callback(self, interaction: discord.Interaction) -> None:
+    async def _increment(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
         self.counter += 1
         await self.update()
 
-    async def _reset_callback(self, interaction: discord.Interaction) -> None:
+    async def _reset(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
         self.counter = 0
         await self.update()
