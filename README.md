@@ -2,6 +2,7 @@
 
 Pycord Reactive Views is a powerful library that extends [Pycord](https://pycord.dev), bringing reactive programming to Discord bot development. It enables developers to create dynamic, responsive user interfaces for their bots with ease.
 
+![Color select example](./assets/color_select.gif)
 ## Table of Contents
 - [What is Reactivity?](#what-is-reactivity)
 - [Features](#features)
@@ -86,6 +87,8 @@ async def counter(ctx):
     view = Counter()
     await Counter().send(ctx)
 ```
+
+![Counter Example](./assets/counter.gif)
 
 This example demonstrates how to bind a button's label, style, and disabled state to functions that determine their values based on the current state of the counter.
 
