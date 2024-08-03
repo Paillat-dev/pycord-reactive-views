@@ -51,7 +51,8 @@ class ReactiveButton(discord.ui.Button, Reactive):  # pyright: ignore[reportUnsa
         self.add_reactive("url", url)
         self.add_reactive("emoji", emoji)
         self.add_reactive("row", row)
-        self.custom_id = custom_id
+        if custom_id:
+            self.custom_id = custom_id
         self.sku_id = sku_id
 
 

@@ -43,10 +43,8 @@ class ColourSelector(ReactiveView):
                 for colour in colors
             ],
             placeholder="Select a colour",
-            custom_id="colour_select",
         )
         self.shade_select = ReactiveSelect(
-            custom_id="shade_select",
             placeholder="Select a shade",
             options=ReactiveValue(
                 lambda: [
