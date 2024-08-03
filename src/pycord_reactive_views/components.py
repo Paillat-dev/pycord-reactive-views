@@ -51,3 +51,36 @@ class ReactiveButton(discord.ui.Button, Reactive):  # pyright: ignore[reportUnsa
         self.add_reactive("url", url)
         self.add_reactive("emoji", emoji)
         self.add_reactive("row", row)
+        self.custom_id = custom_id
+        self.sku_id = sku_id
+
+
+class ReactiveSelect(discord.ui.Select, Reactive):  # pyright: ignore[reportUnsafeMultipleInheritance,reportMissingTypeArgument]
+    """A select menu that can be used with reactive values."""
+
+    def __init__(
+        self,
+        select_type: discord.ComponentType = discord.ComponentType.string_select,
+        *,
+        custom_id: str | None = None,
+        placeholder: MaybeReactiveValue[str | None] = None,
+        min_values: MaybeReactiveValue[int] = 1,
+        max_values: MaybeReactiveValue[int] = 1,
+        options: MaybeReactiveValue[list[discord.SelectOption] | None] = None,
+        channel_types: MaybeReactiveValue[list[discord.ChannelType] | None] = None,
+        disabled: MaybeReactiveValue[bool] = False,
+        row: MaybeReactiveValue[int | None] = None,
+    ):
+        discord.ui.Select.__init__(self)
+        Reactive.__init__(self)
+        self.add_reactive("placeholder", placeholder)
+        self.add_reactive("min_values", min_values)
+        self.add_reactive("max_values", max_values)
+        self.add_reactive("options", options)
+        if select_type == discord.ComponentType.channel_select:
+            self.add_reactive("channel_types", channel_types)
+        self.add_reactive("disabled", disabled)
+        self.add_reactive("row", row)
+        if custom_id:
+            self.custom_id = custom_id
+        self.select_type = select_type

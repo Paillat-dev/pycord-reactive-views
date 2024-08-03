@@ -28,6 +28,8 @@ class ReactiveView(discord.ui.View):
 
     async def _get_embeds(self) -> list[discord.Embed]:
         """Get the discord embeds to be displayed in the message."""
+        if embed := await self._get_embed():
+            return [embed]
         return []
 
     async def _get_content(self) -> str | None:
