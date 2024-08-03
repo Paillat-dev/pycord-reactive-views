@@ -1,8 +1,9 @@
 from typing import Self
 
 import discord
+from typing_extensions import override
 
-from .components import ReactiveButton
+from .components import Reactive
 
 
 class ReactiveView(discord.ui.View):
@@ -15,10 +16,11 @@ class ReactiveView(discord.ui.View):
         disable_on_timeout: bool = False,
     ):
         super().__init__(timeout=timeout, disable_on_timeout=disable_on_timeout)
-        self._reactives: list[ReactiveButton] = []
+        self._reactives: list[Reactive] = []
 
+    @override
     def add_item(self, item: discord.ui.Item[Self]) -> None:
-        if isinstance(item, ReactiveButton):
+        if isinstance(item, Reactive):
             self._reactives.append(item)
         super().add_item(item)
 

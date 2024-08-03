@@ -1,9 +1,9 @@
-# ruff: noqa: INP001
 import os
 
 import discord
 from dotenv import load_dotenv
 from pycord_reactive_views import ReactiveSelect, ReactiveValue, ReactiveView
+from typing_extensions import override
 
 load_dotenv()
 
@@ -71,6 +71,7 @@ class ColourSelector(ReactiveView):
     async def _colour_select_callback(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
         self.colour = self.colour_select.values[0]  # pyright: ignore[reportAttributeAccessIssue]
+        self.shade = colors[self.colour][0]
         await self.update()
 
     async def _shade_select_callback(self, interaction: discord.Interaction) -> None:
@@ -79,6 +80,7 @@ class ColourSelector(ReactiveView):
         self.shade = discord.Colour(selected_shade)
         await self.update()
 
+    @override
     async def _get_embed(self) -> discord.Embed | None:
         return discord.Embed(
             title=f"{self.colour.capitalize()} {self.shade}",

@@ -20,6 +20,7 @@ classifiers = [
 requires-python = ">=3.11"
 dependencies = [
     "py-cord>=2.6.0",
+    "typing-extensions<5,>=4.4.0",
 ]
 version = "0.1.0"
 license = {text = "MIT"}
@@ -110,7 +111,9 @@ ignore = [
     "ISC001", # Single line implicit string concatenation ("hi" "hey" -> "hihey")
     "ISC002", # Multi line implicit string concatenation
 
-    "DOC501"
+    "DOC501",
+    "DOC201",
+    "PLR6301"
 ]
 
 [tool.ruff.lint.isort]

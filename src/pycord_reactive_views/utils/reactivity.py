@@ -1,6 +1,6 @@
 from collections.abc import Awaitable, Callable
 from inspect import isawaitable
-from typing import TypeGuard, TypeVar, Generic
+from typing import Generic, TypeGuard, TypeVar
 
 T = TypeVar("T")
 

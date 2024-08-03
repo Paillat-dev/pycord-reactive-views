@@ -1,4 +1,3 @@
-# ruff: noqa: INP001
 import os
 
 import discord
@@ -26,7 +25,7 @@ class Counter(ReactiveView):
         self.reset_button = ReactiveButton(
             label="Reset",
             style=discord.ButtonStyle.danger,
-            disabled=ReactiveValue(lambda: self.counter == 0, True),
+            disabled=ReactiveValue(lambda: self.counter == 0, default=True),
         )
         self.counter_button.callback = self._increment
         self.reset_button.callback = self._reset
