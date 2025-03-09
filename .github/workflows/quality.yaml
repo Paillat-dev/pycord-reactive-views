@@ -3,9 +3,9 @@ name: Quality Checks
 on:
   workflow_call:
 
-
 jobs:
   check-license-header:
+    name: License Header Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
