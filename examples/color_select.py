@@ -1,9 +1,13 @@
+# Copyright (c) Paillat-dev
+# SPDX-License-Identifier: MIT
+
 import os
 
 import discord
 from dotenv import load_dotenv
-from pycord_reactive_views import ReactiveSelect, ReactiveValue, ReactiveView
 from typing_extensions import override
+
+from pycord_reactive_views import ReactiveSelect, ReactiveValue, ReactiveView
 
 load_dotenv()
 
@@ -30,11 +34,11 @@ colors: dict[str, list[discord.Colour]] = {
 class ColourSelector(ReactiveView):
     """A simple view that allows you to select a colour and shade and updates the embed based on the selection."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.colour: str = "red"
         self.shade: discord.Colour = discord.Colour.red()
-        self.colour_select = discord.ui.Select(
+        self.colour_select: discord.ui.Select[ColourSelector] = discord.ui.Select(
             options=[
                 discord.SelectOption(
                     label=colour.capitalize(),
@@ -44,7 +48,7 @@ class ColourSelector(ReactiveView):
             ],
             placeholder="Select a colour",
         )
-        self.shade_select = ReactiveSelect(
+        self.shade_select: ReactiveSelect = ReactiveSelect(
             placeholder="Select a shade",
             options=ReactiveValue(
                 lambda: [
@@ -68,13 +72,13 @@ class ColourSelector(ReactiveView):
 
     async def _colour_select_callback(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
-        self.colour = self.colour_select.values[0]  # pyright: ignore[reportAttributeAccessIssue]
+        self.colour = str(self.colour_select.values[0])
         self.shade = colors[self.colour][0]
         await self.update()
 
     async def _shade_select_callback(self, interaction: discord.Interaction) -> None:
         await interaction.response.defer()
-        selected_shade = int(self.shade_select.values[0])  # pyright: ignore[reportArgumentType]
+        selected_shade = int(self.shade_select.values[0])
         self.shade = discord.Colour(selected_shade)
         await self.update()
 

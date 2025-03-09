@@ -1,3 +1,6 @@
+# Copyright (c) Paillat-dev
+# SPDX-License-Identifier: MIT
+
 from typing import Self
 
 import discord
@@ -14,15 +17,15 @@ class ReactiveView(discord.ui.View):
         *,
         timeout: float | None = 180.0,
         disable_on_timeout: bool = False,
-    ):
-        super().__init__(timeout=timeout, disable_on_timeout=disable_on_timeout)
+    ) -> None:
+        super().__init__(timeout=timeout, disable_on_timeout=disable_on_timeout)  # pyright: ignore[reportUnknownMemberType]
         self._reactives: list[Reactive] = []
 
     @override
     def add_item(self, item: discord.ui.Item[Self]) -> None:
         if isinstance(item, Reactive):
             self._reactives.append(item)
-        super().add_item(item)
+        super().add_item(item)  # pyright: ignore [reportUnknownMemberType]
 
     async def _get_embed(self) -> discord.Embed | None:
         """Get the discord embed to be displayed in the message."""
@@ -55,6 +58,6 @@ class ReactiveView(discord.ui.View):
     async def send(self, ctx: discord.ApplicationContext | discord.Interaction) -> None:
         """Send the view to a context."""
         if embeds := await self._get_embeds():
-            await ctx.respond(content=await self._get_content(), embeds=embeds, view=self)
+            await ctx.respond(content=await self._get_content(), embeds=embeds, view=self)  # pyright: ignore [reportUnknownMemberType]
         else:
-            await ctx.respond(content=await self._get_content(), view=self)
+            await ctx.respond(content=await self._get_content(), view=self)  # pyright: ignore [reportUnknownMemberType]

@@ -1,3 +1,6 @@
+# Copyright (c) Paillat-dev
+# SPDX-License-Identifier: MIT
+
 from typing import Any
 
 import discord
@@ -8,12 +11,12 @@ from .utils import MaybeReactiveValue, ReactiveValue, is_reactive
 class Reactive:
     """A class that can be used with reactive values."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.reactives: dict[str, ReactiveValue[Any]] = {}
-        self.super_kwargs: dict[str, Any] = {}
+        self.reactives: dict[str, ReactiveValue[Any]] = {}  # pyright: ignore [reportExplicitAny]
+        self.super_kwargs: dict[str, Any] = {}  # pyright: ignore [reportExplicitAny]
 
-    def add_reactive(self, key: str, value: MaybeReactiveValue[Any]) -> None:
+    def add_reactive(self, key: str, value: MaybeReactiveValue[Any]) -> None:  # pyright: ignore[reportExplicitAny]
         """Add a reactive value to the view."""
         if is_reactive(value):
             self.reactives[key] = value
@@ -42,8 +45,8 @@ class ReactiveButton(discord.ui.Button, Reactive):  # pyright: ignore[reportUnsa
         emoji: MaybeReactiveValue[str | discord.Emoji | discord.PartialEmoji | None] = None,
         sku_id: int | None = None,
         row: MaybeReactiveValue[int | None] = None,
-    ):
-        discord.ui.Button.__init__(self)
+    ) -> None:
+        discord.ui.Button.__init__(self)  # pyright: ignore [reportUnknownMemberType]
         Reactive.__init__(self)
         self.add_reactive("style", style)
         self.add_reactive("label", label)
@@ -52,8 +55,8 @@ class ReactiveButton(discord.ui.Button, Reactive):  # pyright: ignore[reportUnsa
         self.add_reactive("emoji", emoji)
         self.add_reactive("row", row)
         if custom_id:
-            self.custom_id = custom_id
-        self.sku_id = sku_id
+            self.custom_id: str | None = custom_id
+        self.sku_id: int | None = sku_id
 
 
 class ReactiveSelect(discord.ui.Select, Reactive):  # pyright: ignore[reportUnsafeMultipleInheritance,reportMissingTypeArgument]
@@ -71,8 +74,8 @@ class ReactiveSelect(discord.ui.Select, Reactive):  # pyright: ignore[reportUnsa
         channel_types: MaybeReactiveValue[list[discord.ChannelType] | None] = None,
         disabled: MaybeReactiveValue[bool] = False,
         row: MaybeReactiveValue[int | None] = None,
-    ):
-        discord.ui.Select.__init__(self)
+    ) -> None:
+        discord.ui.Select.__init__(self)  # pyright: ignore [reportUnknownMemberType, reportArgumentType]
         Reactive.__init__(self)
         self.add_reactive("placeholder", placeholder)
         self.add_reactive("min_values", min_values)
@@ -83,5 +86,5 @@ class ReactiveSelect(discord.ui.Select, Reactive):  # pyright: ignore[reportUnsa
         self.add_reactive("disabled", disabled)
         self.add_reactive("row", row)
         if custom_id:
-            self.custom_id = custom_id
-        self.select_type = select_type
+            self.custom_id: str | None = custom_id
+        self.select_type: discord.ComponentType = select_type

@@ -1,7 +1,11 @@
+# Copyright (c) Paillat-dev
+# SPDX-License-Identifier: MIT
+
 import os
 
 import discord
 from dotenv import load_dotenv
+
 from pycord_reactive_views import ReactiveButton, ReactiveValue, ReactiveView
 
 load_dotenv()
@@ -12,17 +16,17 @@ bot = discord.Bot()
 class Counter(ReactiveView):
     """A simple counter view that increments a counter when a button is clicked."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.counter = 0
-        self.counter_button = ReactiveButton(
+        self.counter: int = 0
+        self.counter_button: ReactiveButton = ReactiveButton(
             label=ReactiveValue(lambda: f"Count: {self.counter}", "Count: 0"),
             style=ReactiveValue(
                 lambda: discord.ButtonStyle.primary if self.counter % 2 == 0 else discord.ButtonStyle.secondary,
                 discord.ButtonStyle.primary,
             ),
         )
-        self.reset_button = ReactiveButton(
+        self.reset_button: ReactiveButton = ReactiveButton(
             label="Reset",
             style=discord.ButtonStyle.danger,
             disabled=ReactiveValue(lambda: self.counter == 0, default=True),

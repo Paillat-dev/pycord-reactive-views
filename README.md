@@ -1,9 +1,13 @@
 # Pycord Reactive Views
 
-Pycord Reactive Views is a powerful library that extends [Pycord](https://pycord.dev), bringing reactive programming to Discord bot development. It enables developers to create dynamic, responsive user interfaces for their bots with ease.
+Pycord Reactive Views is a powerful library that extends [Pycord](https://pycord.dev),
+bringing reactive programming to Discord bot development. It enables developers to
+create dynamic, responsive user interfaces for their bots with ease.
 
 ![Color select example](./assets/color_select.gif)
+
 ## Table of Contents
+
 - [What is Reactivity?](#what-is-reactivity)
 - [Features](#features)
 - [Installation](#installation)
@@ -15,16 +19,22 @@ Pycord Reactive Views is a powerful library that extends [Pycord](https://pycord
 
 ## What is Reactivity?
 
-Reactivity is a programming paradigm commonly used in front-end development. It allows for the creation of dynamic user interfaces that update in real-time based on changes in the underlying data. Pycord Reactive Views brings this powerful concept to Discord bot development.
+Reactivity is a programming paradigm commonly used in front-end development. It allows
+for the creation of dynamic user interfaces that update in real-time based on changes in
+the underlying data. Pycord Reactive Views brings this powerful concept to Discord bot
+development.
 
-In Pycord, reactivity is implemented through `View` classes. These classes are responsible for:
+In Pycord, reactivity is implemented through `View` classes. These classes are
+responsible for:
+
 - Rendering the user interface
 - Updating the UI in response to data changes
 - Handling user interactions
 
 ## Features
 
-- **Reactive Components**: Create buttons, select menus, and other Discord components that automatically update based on your bot's state.
+- **Reactive Components**: Create buttons, select menus, and other Discord components
+  that automatically update based on your bot's state.
 - **Declarative Syntax**: Define your UI logic in a clear, declarative manner.
 - **Easy Integration**: Seamlessly integrates with existing Pycord projects.
 - **Performance Optimized**: Efficiently updates only the components that have changed.
@@ -90,15 +100,19 @@ async def counter(ctx):
 
 ![Counter Example](./assets/counter.gif)
 
-This example demonstrates how to bind a button's label, style, and disabled state to functions that determine their values based on the current state of the counter.
+This example demonstrates how to bind a button's label, style, and disabled state to
+functions that determine their values based on the current state of the counter.
 
 ## Documentation
 
-Comprehensive documentation is coming soon. In the meantime, please refer to the examples in the `examples` directory and the inline comments in the source code for guidance on using Pycord Reactive Views.
+Comprehensive documentation is coming soon. In the meantime, please refer to the
+examples in the `examples` directory and the inline comments in the source code for
+guidance on using Pycord Reactive Views.
 
 ## Examples
 
-Check out the `examples` directory in our GitHub repository for more detailed examples of how to use Pycord Reactive Views in various scenarios.
+Check out the `examples` directory in our GitHub repository for more detailed examples
+of how to use Pycord Reactive Views in various scenarios.
 
 ## Contributing
 
@@ -109,8 +123,10 @@ We welcome contributions to Pycord Reactive Views! If you'd like to contribute, 
 3. Make your changes and write tests if applicable
 4. Submit a pull request with a clear description of your changes
 
-For major changes or feature requests, please open an issue first to discuss what you would like to change.
+For major changes or feature requests, please open an issue first to discuss what you
+would like to change.
 
 ## License
 
-Pycord Reactive Views is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+Pycord Reactive Views is licensed under the MIT License. See the [LICENSE](LICENSE) file
+for more information.
