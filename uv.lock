@@ -329,7 +329,7 @@ wheels = [
 
 [[package]]
 name = "pycord-reactive-views"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "py-cord" },
     { name = "typing-extensions" },

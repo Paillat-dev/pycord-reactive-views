@@ -1,4 +1,6 @@
-packages = ["src/pycord_rest"]
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
 [project]
 name = "pycord-reactive-views"
@@ -34,18 +36,18 @@ dev = [
 source = "vcs"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "src/pycord_reactve_views/_version.py"
+version-file = "src/pycord_reactive_views/_version.py"
 
 [tool.hatch.metadata.hooks.vcs.urls]
 Homepage = "https://github.com/Paillat-dev/pycord-reactive-views"
 source_archive = "https://github.com/Paillat-dev/pycord-reactive-views/archive/{commit_hash}.zip"
 
 [tool.hatchling]
-name = "pycord-rest-bot"
+name = "pycord-reactive-views"
 
 [tool.hatch.build]
 include = [
-    "src/pycord_reactve_views/",
+    "src/pycord_reactive_views/",
 ]
 exclude = [
     ".copywrite.hcl",
@@ -55,7 +57,7 @@ exclude = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pycord_reactve_views"]
+packages = ["src/pycord_reactive_views"]
 
 [tool.pyright]
 pythonVersion = "3.11"
@@ -63,7 +65,7 @@ typeCheckingMode = "all"
 reportUnusedCallResult = false
 reportAny = false
 executionEnvironments = [
-    { root = "src/pycord_reactve_views/_version.py", reportDeprecated = false },
+    { root = "src/pycord_reactive_views/_version.py", reportDeprecated = false },
     { root = "examples", reportExplicitAny = false, reportUnknownMemberType = false, reportUnusedParameter = false, reportImplicitOverride = false, reportArgumentType = false }
 ]
 
@@ -80,7 +82,7 @@ line-ending = "auto"
 docstring-code-format = false
 docstring-code-line-length = "dynamic"
 exclude = [
-    "src/pycord_reactve_views/_version.py"
+    "src/pycord_reactive_views/_version.py"
 ]
 
 [tool.ruff.lint]
