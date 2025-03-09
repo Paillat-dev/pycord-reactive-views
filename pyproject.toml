@@ -7,7 +7,7 @@ name = "pycord-reactive-views"
 authors = [
     {name = "Paillat-dev", email = "me@paillat.dev"},
 ]
-description = "A py-cord extention for easy creation of reactive views"
+description = "A py-cord extension for easy creation of reactive views"
 readme = "README.md"
 classifiers = [
     "Development Status :: 3 - Alpha",
