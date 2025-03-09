@@ -37,8 +37,8 @@ source = "vcs"
 version-file = "src/pycord_reactve_views/_version.py"
 
 [tool.hatch.metadata.hooks.vcs.urls]
-Homepage = "https://github.com/Paillat-dev/pycord-rest"
-source_archive = "https://github.com/Paillat-dev/pycord-rest/archive/{commit_hash}.zip"
+Homepage = "https://github.com/Paillat-dev/pycord-reactive-views"
+source_archive = "https://github.com/Paillat-dev/pycord-reactive-views/archive/{commit_hash}.zip"
 
 [tool.hatchling]
 name = "pycord-rest-bot"
