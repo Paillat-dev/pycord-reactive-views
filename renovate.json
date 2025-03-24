@@ -1,41 +1,25 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "baseBranches": [
-    "main"
-  ],
-  "labels": [
-    "deps"
-  ],
-  "ignorePaths": [
-    "requirements.txt"
-  ],
+  "extends": ["config:recommended"],
+  "baseBranches": ["main"],
+  "labels": ["deps"],
+  "ignorePaths": ["requirements.txt"],
   "commitMessagePrefix": "⬆️",
   "commitMessageAction": "Upgrade",
   "packageRules": [
     {
-      "matchUpdateTypes": [
-        "pin"
-      ],
+      "matchUpdateTypes": ["pin"],
       "commitMessagePrefix": "📌",
       "commitMessageAction": "Pin"
     },
     {
-      "matchUpdateTypes": [
-        "rollback"
-      ],
+      "matchUpdateTypes": ["rollback"],
       "commitMessagePrefix": "⬇️",
       "commitMessageAction": "Downgrade"
     },
     {
-      "matchDatasources": [
-        "pypi"
-      ],
-      "addLabels": [
-        "pypi"
-      ]
+      "matchDatasources": ["pypi"],
+      "addLabels": ["pypi"]
     }
   ]
 }
