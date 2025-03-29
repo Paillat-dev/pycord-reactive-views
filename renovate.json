@@ -17,9 +17,6 @@
       "commitMessagePrefix": "⬇️",
       "commitMessageAction": "Downgrade"
     },
-    {
-      "matchDatasources": ["pypi"],
-      "addLabels": ["pypi"]
-    }
+    { "matchDatasources": ["pypi"], "addLabels": ["pypi"] }
   ]
 }
