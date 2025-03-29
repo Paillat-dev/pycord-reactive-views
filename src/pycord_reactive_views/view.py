@@ -53,9 +53,9 @@ class ReactiveView(discord.ui.View):
         if not editable:
             raise ValueError("View has no editable (not yet sent?), can't refresh")
         if embeds := await self._get_embeds():
-            await editable.edit(content=await self._get_content(), embeds=embeds, view=self)
+            await editable.edit(content=await self._get_content(), embeds=embeds, view=self)  # pyright: ignore[reportUnknownMemberType]
         else:
-            await editable.edit(content=await self._get_content(), view=self)
+            await editable.edit(content=await self._get_content(), view=self)  # pyright: ignore[reportUnknownMemberType]
 
     async def send(self, ctx: discord.ApplicationContext | discord.Interaction, ephemeral: bool = False) -> None:
         """Send the view to a context."""

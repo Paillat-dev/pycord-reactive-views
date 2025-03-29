@@ -75,7 +75,7 @@ class ReactiveSelect(discord.ui.Select, Reactive):  # pyright: ignore[reportUnsa
         disabled: MaybeReactiveValue[bool] = False,
         row: MaybeReactiveValue[int | None] = None,
     ) -> None:
-        discord.ui.Select.__init__(self)  # pyright: ignore [reportUnknownMemberType, reportArgumentType]
+        discord.ui.Select.__init__(self)  # pyright: ignore [reportUnknownMemberType]
         Reactive.__init__(self)
         self.add_reactive("placeholder", placeholder)
         self.add_reactive("min_values", min_values)
