@@ -50,7 +50,7 @@ class Counter(ReactiveView):
 @bot.slash_command()
 async def counter(ctx: discord.ApplicationContext) -> None:
     """Send the counter view."""
-    await Counter().send(ctx)
+    await Counter().send(ctx, ephemeral=True)
 
 
-bot.run(os.getenv("TOKEN"))
+bot.run(os.getenv("TOKEN_2"))

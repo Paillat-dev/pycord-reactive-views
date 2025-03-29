@@ -20,6 +20,7 @@ class ReactiveView(discord.ui.View):
     ) -> None:
         super().__init__(timeout=timeout, disable_on_timeout=disable_on_timeout)  # pyright: ignore[reportUnknownMemberType]
         self._reactives: list[Reactive] = []
+        self.ctx: discord.ApplicationContext | discord.Interaction | None = None
 
     @override
     def add_item(self, item: discord.ui.Item[Self]) -> None:
@@ -48,16 +49,18 @@ class ReactiveView(discord.ui.View):
         """
         for reactive in self._reactives:
             await reactive.refresh()
-        if not self.message:
-            raise ValueError("View has no message (not yet sent?), can't refresh")
+        editable = self.ctx or self.message
+        if not editable:
+            raise ValueError("View has no editable (not yet sent?), can't refresh")
         if embeds := await self._get_embeds():
-            await self.message.edit(content=await self._get_content(), embeds=embeds, view=self)
+            await editable.edit(content=await self._get_content(), embeds=embeds, view=self)
         else:
-            await self.message.edit(content=await self._get_content(), view=self)
+            await editable.edit(content=await self._get_content(), view=self)
 
-    async def send(self, ctx: discord.ApplicationContext | discord.Interaction) -> None:
+    async def send(self, ctx: discord.ApplicationContext | discord.Interaction, ephemeral: bool = False) -> None:
         """Send the view to a context."""
+        self.ctx = ctx
         if embeds := await self._get_embeds():
-            await ctx.respond(content=await self._get_content(), embeds=embeds, view=self)  # pyright: ignore [reportUnknownMemberType]
+            await ctx.respond(content=await self._get_content(), embeds=embeds, view=self, ephemeral=ephemeral)  # pyright: ignore [reportUnknownMemberType]
         else:
-            await ctx.respond(content=await self._get_content(), view=self)  # pyright: ignore [reportUnknownMemberType]
+            await ctx.respond(content=await self._get_content(), view=self, ephemeral=ephemeral)  # pyright: ignore [reportUnknownMemberType]
