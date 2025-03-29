@@ -20,7 +20,13 @@ class ReactiveView(discord.ui.View):
     ) -> None:
         super().__init__(timeout=timeout, disable_on_timeout=disable_on_timeout)  # pyright: ignore[reportUnknownMemberType]
         self._reactives: list[Reactive] = []
-        self.ctx: discord.ApplicationContext | discord.Interaction | discord.WebhookMessage | None = None
+        self.ctx: (
+            discord.InteractionMessage
+            | discord.ApplicationContext
+            | discord.Interaction
+            | discord.WebhookMessage
+            | None
+        ) = None
 
     @override
     def add_item(self, item: discord.ui.Item[Self]) -> None:
@@ -57,12 +63,17 @@ class ReactiveView(discord.ui.View):
             kwargs["embeds"] = embeds
         await editable.edit(**kwargs)  # pyright: ignore[reportUnknownMemberType]
 
-    async def send(self, ctx: discord.ApplicationContext | discord.Interaction, ephemeral: bool = False) -> None:
+    async def send(
+        self, ctx: discord.ApplicationContext | discord.Interaction, ephemeral: bool = False, edit: bool = False
+    ) -> None:
         """Send the view to a context."""
         self.ctx = ctx
         kwargs: dict[str, Any] = {"content": await self._get_content(), "ephemeral": ephemeral, "view": self}  # pyright: ignore[reportExplicitAny]
         if embeds := await self._get_embeds():
             kwargs["embeds"] = embeds
-        r = await ctx.respond(**kwargs)  # pyright: ignore[reportUnknownMemberType]
+        if edit:
+            r = await ctx.edit(**kwargs)  # pyright: ignore[reportUnknownMemberType]
+        else:
+            r = await ctx.respond(**kwargs)  # pyright: ignore[reportUnknownMemberType]
         if isinstance(ctx, discord.Interaction):
             self.ctx = r
