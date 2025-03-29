@@ -1,7 +1,7 @@
 # Copyright (c) Paillat-dev
 # SPDX-License-Identifier: MIT
 
-from typing import Self
+from typing import Any, Self
 
 import discord
 from typing_extensions import override
@@ -20,7 +20,7 @@ class ReactiveView(discord.ui.View):
     ) -> None:
         super().__init__(timeout=timeout, disable_on_timeout=disable_on_timeout)  # pyright: ignore[reportUnknownMemberType]
         self._reactives: list[Reactive] = []
-        self.ctx: discord.ApplicationContext | discord.Interaction | None = None
+        self.ctx: discord.ApplicationContext | discord.Interaction | discord.WebhookMessage | None = None
 
     @override
     def add_item(self, item: discord.ui.Item[Self]) -> None:
@@ -52,15 +52,17 @@ class ReactiveView(discord.ui.View):
         editable = self.ctx or self.message
         if not editable:
             raise ValueError("View has no editable (not yet sent?), can't refresh")
+        kwargs: dict[str, Any] = {"view": self, "content": await self._get_content()}  # pyright: ignore[reportExplicitAny]
         if embeds := await self._get_embeds():
-            await editable.edit(content=await self._get_content(), embeds=embeds, view=self)  # pyright: ignore[reportUnknownMemberType]
-        else:
-            await editable.edit(content=await self._get_content(), view=self)  # pyright: ignore[reportUnknownMemberType]
+            kwargs["embeds"] = embeds
+        await editable.edit(**kwargs)  # pyright: ignore[reportUnknownMemberType]
 
     async def send(self, ctx: discord.ApplicationContext | discord.Interaction, ephemeral: bool = False) -> None:
         """Send the view to a context."""
         self.ctx = ctx
+        kwargs: dict[str, Any] = {"content": await self._get_content(), "ephemeral": ephemeral, "view": self}  # pyright: ignore[reportExplicitAny]
         if embeds := await self._get_embeds():
-            await ctx.respond(content=await self._get_content(), embeds=embeds, view=self, ephemeral=ephemeral)  # pyright: ignore [reportUnknownMemberType]
-        else:
-            await ctx.respond(content=await self._get_content(), view=self, ephemeral=ephemeral)  # pyright: ignore [reportUnknownMemberType]
+            kwargs["embeds"] = embeds
+        r = await ctx.respond(**kwargs)  # pyright: ignore[reportUnknownMemberType]
+        if isinstance(ctx, discord.Interaction):
+            self.ctx = r
