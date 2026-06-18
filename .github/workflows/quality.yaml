@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Setup Copywrite
         uses: hashicorp/setup-copywrite@5e3e8a26d7b9f8a508848ad0a069dfd2f7aa5339
       - name: Check Header Compliance
@@ -35,7 +35,7 @@ jobs:
     name: ${{ matrix.name }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: "Install uv"
         uses: astral-sh/setup-uv@v6
